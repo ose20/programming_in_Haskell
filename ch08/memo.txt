@@ -1,0 +1,49 @@
+((1 + 2) + (3 + 4)) + (5 + 6)
+
+  value (Add ((Add (Val 1) (Val 2)) (Add (Val 3) (Val 4))) (Add (Val 5) (Val 6)))
+=
+  eval (Add ((Add (Val 1) (Val 2)) (Add (Val 3) (Val 4))) (Add (Val 5) (Val 6))) []
+= 
+  eval (Add ((Add (Val 1) (Val 2)) (Add (Val 3) (Val 4)))) [EVAL (Add (Val 5) (Val 6))]
+=
+  eval (Add (Val 1) (Val 2)) [EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))]
+=
+  eval (Val 1) [EVAL (Val 2), EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))]
+=
+  exec [EVAL (Val 2), EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))] 1
+=
+  eval (Val 2) [ADD 1, EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))]
+=
+  exec [ADD 1, EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))] 2
+=
+  exec [EVAL (Add (Val 3) (Val 4)), EVAL (Add (Val 5) (Val 6))] 3
+=
+  eval (Add (Val 3) (Val 4)) [ADD 3, EVAL (Add (Val 5) (Val 6))]
+=
+  eval (Val 4) [EVAL (Val 3), ADD 3, EVAL (Add (Val 5) (Val 6))]
+=
+  exec [EVAL (Val 3), ADD 3, EVAL (Add (Val 5) (Val 6))] 4
+=
+  eval (Val 3) [ADD 4, ADD 3, EVAL (Add (Val 5) (Val 6))]
+=
+  exec [ADD 4, ADD 3, EVAL (Add (Val 5) (Val 6))] 3
+=
+  exec [ADD 3, EVAL (Add (Val 5) (Val 6))] 7
+=
+  exec [EVAL (Add (Val 5) (Val 6))] 10
+=
+  eval (Add (Val 5) (Val 6)) [ADD 10]
+=
+  eval (Val 5) [EVAL (Val 6), ADD 10]
+=
+  exec [EVAL (Val 6), ADD 10] 5
+=
+  eval (Val 6) [ADD 5, ADD 10]
+=
+  exec [ADD 5, ADD 10] 6
+=
+  exec [ADD 10] 11
+=
+  exec [] 21
+=
+  21
