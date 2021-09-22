@@ -1,4 +1,6 @@
 memo
-memo.hi
-memo.o
 a.txt
+*.hi
+*.o
+1
+2
