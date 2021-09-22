@@ -113,11 +113,14 @@ prune :: Int -> Tree a -> Tree a
 prune 0 (Node g _) = Node g []
 prune n (Node g ts) = Node g (map (prune (n-1)) ts)
 
-minimax :: Tree Grid -> Tree (Grid,Player)
+
+type Metric = (Player,Int)
+
+minimax :: Tree Grid -> Tree (Grid,Metric)
 minimax (Node g [])
-  | wins g O = Node (g,O) []
-  | wins g X = Node (g,X) []
-  | otherwise = Node (g,B (-1)) []
+  | wins g O = Node (g,(O,0)) []
+  | wins g X = Node (g,(X,0)) []
+  | otherwise = Node (g,(B (-1),0)) []
 minimax (Node g ts)
   | turn g == O = Node (g, minimum ps) ts'
   | turn g == X = Node (g, maximum ps) ts'
@@ -148,6 +151,7 @@ main :: IO ()
 main = do
   hSetBuffering stdout NoBuffering
   play empty O
+
 
 play :: Grid -> Player -> IO ()
 play g p = do
@@ -200,3 +204,14 @@ cls = putStr "\ESC[2J"
 
 goto :: (Int,Int) -> IO ()
 goto (x,y) = putStr ("\ESC[" ++ show y ++ ";" ++ show x ++ "H")
+
+
+-- 最短で勝ってくる一例
+test3 :: IO ()
+test3 = do
+  hSetBuffering stdout NoBuffering
+  play g1 X
+
+g1 = [[B 0, O, X],
+      [O, X, B 5],
+      [B 6, O, X]]
