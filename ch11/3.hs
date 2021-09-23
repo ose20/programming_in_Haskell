@@ -89,9 +89,10 @@ showRow = assemble . interleave bar . map showPlayer
     assemble = foldr1 (zipWith (++))
 
 showPlayer :: Player -> [String]
-showPlayer O = ["   ", " o ", "   "]
-showPlayer X = ["   ", " x ", "   "]
-showPlayer (B i) = ["   ", " " ++ show i ++ " ", "   "]
+showPlayer O = ["   ", " O ", "   "]
+showPlayer X = ["   ", " X ", "   "]
+showPlayer (B i) = [show i ++ "  ", "   ", "   "]
+
 
 valid :: Grid -> Int -> Bool
 valid g i = 0 <= i && i < size^2 && concat g !! i == B i
