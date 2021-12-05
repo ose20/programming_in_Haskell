@@ -1,5 +1,5 @@
 {-
-  1. 二分木を Functor にしよう
+1. 二分木を Functor にしよう
 -}
 
 data Tree a = Leaf | Node (Tree a) a (Tree a)
