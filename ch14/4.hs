@@ -32,3 +32,4 @@ instance Traversable Tree where
   -- traverse :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)
   traverse g Leaf         = pure Leaf
   traverse g (Node l x r) = Node <$> traverse g l <*> g x <*> traverse g r
+
